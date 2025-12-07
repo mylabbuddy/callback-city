@@ -3,264 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Prescription to WhatsApp</title>
-    <!-- Tailwind CSS -->
+    <title>Business Callback Request</title>
+    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        /* Smooth fade for elements */
-        .fade-in { animation: fadeIn 0.3s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fc; /* Light background */
+        }
+        /* Custom styling for WhatsApp button color */
+        .whatsapp-btn {
+            background-color: #25d366; /* WhatsApp Green */
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        .whatsapp-btn:hover {
+            background-color: #128c7e;
+            transform: translateY(-1px);
+        }
+        .whatsapp-btn:active {
+            transform: translateY(0);
+        }
     </style>
 </head>
-<body class="bg-blue-50 min-h-screen flex items-center justify-center p-4">
+<body class="flex items-center justify-center min-h-screen p-4">
 
-    <div class="w-full max-w-lg bg-white rounded-2xl shadow-xl overflow-hidden border border-blue-100">
-        <!-- Header -->
-        <div class="bg-teal-600 p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h2 class="text-2xl font-bold text-white">Upload Prescription</h2>
-                    <p class="text-teal-100 text-sm mt-1">Order medicines directly via WhatsApp</p>
+    <!-- Form Container -->
+    <div class="w-full max-w-lg bg-white p-8 md:p-10 shadow-xl rounded-2xl border border-gray-100">
+
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">Request a Callback</h1>
+        <p class="text-gray-500 mb-6">Fill out the form below and we'll connect directly via WhatsApp Business.</p>
+
+        <form id="callbackForm" class="space-y-6">
+
+            <!-- Name Input -->
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                <input type="text" id="name" name="name" required
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 outline-none transition duration-150"
+                       placeholder="Your Name">
+            </div>
+
+            <!-- Phone Number Input with fixed +91 -->
+            <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                <div class="flex shadow-sm rounded-lg">
+                    <!-- Fixed Prefix -->
+                    <span class="inline-flex items-center px-3 border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm rounded-l-lg select-none">
+                        +91
+                    </span>
+                    <!-- Phone Input -->
+                    <input type="tel" id="phone" name="phone" required maxlength="10" pattern="[0-9]{10}"
+                           class="flex-1 block w-full px-4 py-2 border border-gray-300 rounded-r-lg focus:ring-green-500 focus:border-green-500 outline-none transition duration-150"
+                           placeholder="8448879897">
                 </div>
-                <!-- Pharmacy Icon -->
-                <div class="bg-white/20 p-2 rounded-full">
-                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
-                    </svg>
+                <p class="mt-1 text-xs text-gray-500">Please enter your 10-digit mobile number.</p>
+            </div>
+
+            <!-- City Selection -->
+            <div>
+                <label for="city" class="block text-sm font-medium text-gray-700 mb-1">Select Your City</label>
+                <select id="city" name="city" required
+                        class="mt-1 block w-full pl-4 pr-10 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 bg-white outline-none appearance-none transition duration-150">
+                    <option value="" disabled selected>Choose your city</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Gurugram">Gurugram</option>
+                    <option value="Faridabad">Faridabad</option>
+                    <option value="Sonipat">Sonipat</option>
+                    <option value="Rohtak">Rohtak</option>
+                    <option value="Jhajjar">Jhajjar</option>
+                    <option value="Panipat">Panipat</option>
+                    <option value="Rewari">Rewari</option>
+                    <option value="Palwal">Palwal</option>
+                    <option value="Nuh/Mewat">Nuh/Mewat</option>
+                    <option value="Bhiwani">Bhiwani</option>
+                    <option value="Charkhi Dadri">Charkhi Dadri</option>
+                    <option value="Jind">Jind</option>
+                    <option value="Karnal">Karnal</option>
+                    <option value="Noida/Gautam Budh Nagar">Noida/Gautam Budh Nagar</option>
+                    <option value="Ghaziabad">Ghaziabad</option>
+                    <option value="Meerut">Meerut</option>
+                    <option value="Hapur">Hapur</option>
+                    <option value="Bulandshahr">Bulandshahr</option>
+                    <option value="Baghpat">Baghpat</option>
+                    <option value="Muzaffarnagar">Muzaffarnagar</option>
+                    <option value="Shamli">Shamli</option>
+                    <option value="Alwar, Bharatpur">Alwar, Bharatpur</option>
+                </select>
+            </div>
+
+            <!-- Message Textarea -->
+            <div>
+                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Message (Optional)</label>
+                <textarea id="message" name="message" rows="3"
+                          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 outline-none transition duration-150"
+                          placeholder="I need a callback regarding..."></textarea>
+            </div>
+
+            <!-- Privacy Policy Checkbox -->
+            <div class="flex items-start">
+                <div class="flex items-center h-5">
+                    <input id="privacyPolicy" name="privacyPolicy" type="checkbox" required
+                           class="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded">
+                </div>
+                <div class="ml-3 text-sm">
+                    <label for="privacyPolicy" class="font-medium text-gray-700">
+                        I agree to the <a href="#" class="text-green-600 hover:text-green-500 font-semibold" onclick="alert('In a real application, this would link to your Privacy Policy document.')">Privacy Policy</a>
+                    </label>
+                    <p class="text-red-500 text-xs mt-1 hidden" id="privacyError">You must accept the privacy policy to proceed.</p>
                 </div>
             </div>
-        </div>
 
-        <!-- Form -->
-        <div class="p-6 md:p-8">
-            <form id="uploadForm" class="space-y-6">
-                
-                <!-- Personal Details -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1">Name</label>
-                        <input type="text" id="name" required placeholder="Your Name" 
-                            class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition-all">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1">Phone Number</label>
-                        <input type="tel" id="phone" required pattern="[0-9]{10}" placeholder="98765 43210" 
-                            class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition-all">
-                    </div>
-                </div>
-
-                <!-- File Upload Zone -->
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-2">Upload Prescription <span class="text-xs font-normal text-slate-500">(Max 5MB)</span></label>
-                    
-                    <div id="dropZone" class="relative border-2 border-dashed border-slate-300 rounded-xl p-8 text-center hover:bg-slate-50 transition-colors cursor-pointer group">
-                        <input type="file" id="fileInput" accept="image/*,.pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" required>
-                        
-                        <div id="emptyState">
-                            <div class="mx-auto w-12 h-12 bg-teal-50 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                                <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                                </svg>
-                            </div>
-                            <p class="text-sm text-slate-600 font-medium">Click to upload or drag & drop</p>
-                            <p class="text-xs text-slate-400 mt-1">Supports JPG, PNG, PDF</p>
-                        </div>
-
-                        <!-- File Preview State (Hidden by default) -->
-                        <div id="filePreview" class="hidden fade-in">
-                            <div class="flex items-center justify-center space-x-3 bg-teal-50 p-3 rounded-lg border border-teal-100">
-                                <svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                </svg>
-                                <div class="text-left">
-                                    <p id="fileName" class="text-sm font-semibold text-teal-900 truncate max-w-[150px]">filename.jpg</p>
-                                    <p id="fileSize" class="text-xs text-teal-600">2.5 MB</p>
-                                </div>
-                                <button type="button" id="removeFile" class="p-1 hover:bg-red-100 rounded-full text-slate-400 hover:text-red-500 transition-colors">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                </button>
-                            </div>
-                            <p class="text-xs text-green-600 mt-2 font-medium flex items-center justify-center">
-                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Ready to attach
-                            </p>
-                        </div>
-                    </div>
-                    <p id="errorMsg" class="text-red-500 text-xs mt-2 hidden text-center"></p>
-                </div>
-
-                <!-- Additional Notes -->
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-1">Additional Notes</label>
-                    <textarea id="message" rows="2" placeholder="E.g., I need 2 strips of the second medicine..." 
-                        class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition-all resize-none"></textarea>
-                </div>
-
-                <!-- Submit Button -->
-                <button type="submit" 
-                    class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg hover:shadow-teal-500/30 transition-all duration-200 flex items-center justify-center group relative overflow-hidden">
-                    <span class="relative z-10 flex items-center">
-                        Proceed to WhatsApp
-                        <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                        </svg>
-                    </span>
+            <!-- Submit Button -->
+            <div>
+                <button type="submit"
+                        class="whatsapp-btn w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-md text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-150">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12.04 2C6.54 2 2.08 6.46 2.08 11.96C2.08 13.79 2.58 15.49 3.42 16.94L2.01 22.03L7.22 20.65C8.68 21.46 10.32 21.89 12.04 21.89C17.54 21.89 22 17.43 22 11.96C22 6.46 17.54 2 12.04 2ZM17.26 15.65C17.02 16.29 15.46 17.15 14.8 17.27C14.14 17.39 13.56 17.41 12.98 17.17C12.39 16.93 11.43 16.59 10.15 15.54C8.94 14.54 8.08 13.29 7.82 12.94C7.57 12.59 7.38 12.28 7.38 11.75C7.38 11.22 7.63 10.74 7.94 10.45C8.25 10.16 8.52 10.08 8.78 10.08C9.04 10.08 9.27 10.12 9.47 10.51C9.68 10.9 9.87 11.38 9.92 11.47C9.97 11.56 10.05 11.7 10.01 11.89C9.97 12.08 9.91 12.16 9.83 12.26C9.75 12.36 9.68 12.44 9.58 12.55C9.48 12.66 9.38 12.75 9.42 12.87C9.47 13.01 9.8 13.55 10.37 14.07C10.94 14.58 11.5 14.81 11.77 14.93C12.04 15.05 12.18 15.05 12.27 14.99C12.45 14.87 12.75 14.48 13.02 14.13C13.29 13.78 13.57 13.84 13.77 13.92C13.97 14.01 15.11 14.6 15.35 14.73C15.59 14.86 15.74 14.94 15.82 15.06C15.9 15.18 15.98 15.33 15.98 15.46C15.98 15.59 15.93 15.71 15.65 16.03C15.37 16.35 15.12 16.56 14.99 16.66C14.86 16.76 14.74 16.77 14.61 16.89L14.61 16.98C15.35 17.27 16.27 17.15 17.26 15.65Z"/>
+                    </svg>
+                    Send Request to WhatsApp
                 </button>
-                <p class="text-xs text-center text-slate-500">
-                    <span class="font-bold text-teal-600">*Important:</span> You will attach this file in the WhatsApp chat window on the next step.
-                </p>
-            </form>
-        </div>
-    </div>
+            </div>
+            
+            <!-- Message Box for Success/Error feedback (replacing alert()) -->
+            <div id="messageBox" class="p-3 text-sm rounded-lg text-center hidden" role="alert"></div>
 
-    <!-- Notification Toast (Hidden initially) -->
-    <div id="toast" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-slate-800 text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-3 transition-all duration-300 opacity-0 translate-y-10 pointer-events-none z-50">
-        <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        <span class="text-sm">Don't forget to attach your file in WhatsApp!</span>
+        </form>
     </div>
 
     <script>
-        // DOM Elements
-        const form = document.getElementById('uploadForm');
-        const fileInput = document.getElementById('fileInput');
-        const dropZone = document.getElementById('dropZone');
-        const emptyState = document.getElementById('emptyState');
-        const filePreview = document.getElementById('filePreview');
-        const fileNameDisplay = document.getElementById('fileName');
-        const fileSizeDisplay = document.getElementById('fileSize');
-        const removeFileBtn = document.getElementById('removeFile');
-        const errorMsg = document.getElementById('errorMsg');
-        const toast = document.getElementById('toast');
+        document.getElementById('callbackForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Stop default form submission
 
-        // Business Number
-        const WHATSAPP_NUMBER = "918448879897"; // India code 91 added
-
-        // --- File Handling Logic ---
-
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        }
-
-        function handleFileSelect(file) {
-            errorMsg.classList.add('hidden');
+            const form = event.target;
+            const name = form.name.value.trim();
+            const phone = form.phone.value.trim();
+            const city = form.city.value;
+            const message = form.message.value.trim();
+            const privacyChecked = form.privacyPolicy.checked;
+            const messageBox = document.getElementById('messageBox');
+            const privacyError = document.getElementById('privacyError');
             
-            // 1. Validation: Max Size 5MB
-            const maxSize = 5 * 1024 * 1024; // 5MB in bytes
-            if (file.size > maxSize) {
-                errorMsg.textContent = "File is too large! Maximum limit is 5MB.";
-                errorMsg.classList.remove('hidden');
-                fileInput.value = ''; // Clear input
+            // Clear previous messages
+            messageBox.classList.add('hidden');
+            privacyError.classList.add('hidden');
+
+            // Simple validation check
+            if (!privacyChecked) {
+                privacyError.classList.remove('hidden');
+                messageBox.textContent = 'Please accept the privacy policy.';
+                messageBox.className = 'p-3 text-sm rounded-lg text-center bg-red-100 text-red-700';
+                messageBox.classList.remove('hidden');
                 return;
             }
 
-            // 2. Validation: Type (Simple check)
-            if (!file.type.startsWith('image/') && file.type !== 'application/pdf') {
-                errorMsg.textContent = "Invalid file format. Please upload an Image or PDF.";
-                errorMsg.classList.remove('hidden');
-                fileInput.value = '';
-                return;
-            }
+            // --- Construct the WhatsApp Message ---
+            let whatsappMessage = `*Callback Request Received (via Website Form)*\n\n`;
+            whatsappMessage += `👤 *Name:* ${name}\n`;
+            whatsappMessage += `📞 *Phone:* +91${phone}\n`;
+            whatsappMessage += `📍 *City:* ${city}\n`;
+            whatsappMessage += `📝 *Message:* ${message || 'No specific message provided.'}\n\n`;
+            whatsappMessage += `_Please initiate the callback at your earliest convenience._`;
 
-            // 3. Update UI
-            fileNameDisplay.textContent = file.name;
-            fileSizeDisplay.textContent = formatFileSize(file.size);
+            // --- Generate and Open WhatsApp Link ---
+            // Business WhatsApp Number (with 91 prefix for India)
+            const businessNumber = '918448879897'; 
             
-            emptyState.classList.add('hidden');
-            filePreview.classList.remove('hidden');
-            dropZone.classList.add('bg-teal-50', 'border-teal-200');
-            dropZone.classList.remove('border-slate-300');
-        }
+            // URL-encode the message
+            const encodedMessage = encodeURIComponent(whatsappMessage);
 
-        // Event Listeners for File Input
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files.length > 0) {
-                handleFileSelect(e.target.files[0]);
-            }
-        });
+            // Construct the final URL
+            const whatsappUrl = `https://wa.me/${businessNumber}?text=${encodedMessage}`;
 
-        // Event Listeners for Drag & Drop Visuals
-        ['dragenter', 'dragover'].forEach(eventName => {
-            dropZone.addEventListener(eventName, (e) => {
-                e.preventDefault();
-                dropZone.classList.add('bg-slate-100', 'border-teal-400');
-            });
-        });
+            // Provide feedback and open the link
+            messageBox.textContent = 'Preparing your message and opening WhatsApp...';
+            messageBox.className = 'p-3 text-sm rounded-lg text-center bg-green-100 text-green-700';
+            messageBox.classList.remove('hidden');
 
-        ['dragleave', 'drop'].forEach(eventName => {
-            dropZone.addEventListener(eventName, (e) => {
-                e.preventDefault();
-                dropZone.classList.remove('bg-slate-100', 'border-teal-400');
-            });
-        });
+            // Open the URL in a new window/tab
+            window.open(whatsappUrl, '_blank');
 
-        dropZone.addEventListener('drop', (e) => {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            if (files.length > 0) {
-                fileInput.files = files; // Assign dropped file to input
-                handleFileSelect(files[0]);
-            }
-        });
-
-        // Remove File Logic
-        removeFileBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevent opening file dialog
-            e.stopPropagation();
-            fileInput.value = '';
-            emptyState.classList.remove('hidden');
-            filePreview.classList.add('hidden');
-            dropZone.classList.remove('bg-teal-50', 'border-teal-200');
-            dropZone.classList.add('border-slate-300');
-        });
-
-
-        // --- Submit Logic ---
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            // Get text values
-            const name = document.getElementById('name').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const message = document.getElementById('message').value.trim();
-            
-            // Check if file is selected (HTML 'required' handles this usually, but double check)
-            if (fileInput.files.length === 0) {
-                errorMsg.textContent = "Please select a prescription file.";
-                errorMsg.classList.remove('hidden');
-                return;
-            }
-
-            // Construct WhatsApp Text
-            const text = 
-`*New Prescription Order* 💊
---------------------------
-👤 *Name:* ${name}
-📱 *Phone:* ${phone}
-📝 *Note:* ${message ? message : 'None'}
---------------------------
-📎 *Status:* I am attaching the prescription file in this chat now.`;
-
-            // Open WhatsApp
-            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-            window.open(url, '_blank');
-
-            // Show Toast Notification to remind them to attach
-            showToast();
-        });
-
-        function showToast() {
-            toast.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+            // Optionally, clear the form after opening the link
             setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
-            }, 5000);
-        }
+                form.reset();
+                messageBox.textContent = 'Request sent successfully! Check your new WhatsApp chat.';
+                messageBox.className = 'p-3 text-sm rounded-lg text-center bg-blue-100 text-blue-700';
+            }, 1000);
+        });
+
+        // Add input event listener for phone number formatting (optional, but good UX)
+        document.getElementById('phone').addEventListener('input', function(e) {
+            // Remove non-digit characters
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+        
+        // Remove error message when user checks the box
+        document.getElementById('privacyPolicy').addEventListener('change', function(e) {
+            if (e.target.checked) {
+                document.getElementById('privacyError').classList.add('hidden');
+            }
+        });
 
     </script>
 </body>
